@@ -7,7 +7,7 @@ awscli_zip: "/tmp/awscliv2.zip"
 awscli_installer_dir: "/tmp/aws"
 
 # vars file for ssm plugin
-ssm_plugin_arch: "{{ 'ubuntu_arm64' if ansible_architecture in ['aarch64','arm64'] else 'ubuntu_amd64' }}"
+ssm_plugin_arch: "{{ 'ubuntu_arm64' if ansible_architecture in ['aarch64','arm64'] else 'ubuntu_64bit' }}"
 ssm_plugin_version: "latest"  # or specify a version like "1.2.26.0"
 ssm_plugin_url: "https://s3.amazonaws.com/session-manager-downloads/plugin/{{ ssm_plugin_version }}/{{ ssm_plugin_arch }}/session-manager-plugin.deb"
 ssm_plugin_dest: "/tmp/session-manager-plugin.deb"
