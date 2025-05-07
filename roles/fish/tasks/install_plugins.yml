@@ -1,0 +1,21 @@
+---
+- name: Install Fisher plugin manager
+  become_user: "{{ target_user }}"
+  shell: >-
+    fish -c 'curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher'
+  args:
+    creates: "/home/{{ target_user }}/.config/fish/functions/fisher.fish"
+    
+- name: Install plugin z
+  become_user: "{{ target_user }}"
+  shell: >-
+    fish -l -c "fisher install jethrokuan/z"
+  args:
+    creates: "/home/{{ target_user }}/.config/fish/conf.d/z.fish"
+
+- name: Install plugin fzf
+  become_user: "{{ target_user }}"
+  shell: >-
+    fish -l -c "fisher install jethrokuan/fzf"
+  args:
+    creates: "/home/{{ target_user }}/.config/fish/conf.d/fzf.fish"

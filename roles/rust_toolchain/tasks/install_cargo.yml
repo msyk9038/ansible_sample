@@ -1,0 +1,7 @@
+---
+- name: Install Rust package manager Cargo
+  become_user: "{{ target_user }}"
+  shell: >-
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+  args:
+    creates: "/home/{{ target_user }}/.cargo"

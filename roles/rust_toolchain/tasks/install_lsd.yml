@@ -1,0 +1,12 @@
+---
+- name: Install build-essential required for lsd
+  apt:
+    name: build-essential
+    state: present
+  
+- name: Install lsd
+  become_user: "{{ target_user }}"
+  shell: >-
+    /home/{{ target_user }}/.cargo/bin/cargo install lsd
+  args:
+    creates: "/home/{{ target_user }}/.cargo/bin/lsd"

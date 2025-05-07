@@ -1,0 +1,10 @@
+---
+- name: Install fish shell
+  ansible.builtin.package:
+    name: fish
+    state: present
+
+- name: Change login shell
+  ansible.builtin.user:
+    name: "{{ target_user }}"
+    shell: /usr/bin/fish

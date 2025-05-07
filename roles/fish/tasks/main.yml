@@ -1,0 +1,7 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for fish
+- import_tasks: install_fish.yml
+- import_tasks: install_themes.yml
+- import_tasks: install_plugins.yml
+- import_tasks: configure_fish.yml

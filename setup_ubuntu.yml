@@ -1,0 +1,8 @@
+- hosts: multipass_vm
+  become: yes
+  roles:
+    - role: awscli
+    - role: direnv
+    - role: fish
+    - role: rust_toolchain
+    - role: terraform

@@ -1,0 +1,11 @@
+---
+- name: Download Session Manager Plugin .deb if not installed
+  get_url:
+    url: "{{ ssm_plugin_url }}"
+    dest: "{{ ssm_plugin_dest }}"
+    mode: '0644'
+
+- name: Install Session Manager Plugin from .deb if not installed
+  apt:
+    deb: "{{ ssm_plugin_dest }}"
+    state: present

@@ -1,0 +1,23 @@
+---
+- name: Install git
+  apt:
+    name: git
+    state: present
+
+- name: Clone oh-my-fish repo
+  git:
+    repo: 'https://github.com/oh-my-fish/oh-my-fish'
+    dest: '/tmp/omf'
+    clone: yes
+
+- name: Install oh-my-fish
+  become_user: "{{ target_user }}"
+  command: /tmp/omf/bin/install -y --offline --noninteractive
+  args:
+    creates: "/home/{{ target_user }}/.config/omf"
+
+- name: Install agnoster theme
+  become_user: "{{ target_user }}"
+  shell: "fish -l -c 'omf install agnoster'"
+  args:
+    creates: "/home/{{ target_user }}/.local/share/omf/themes/agnoster"

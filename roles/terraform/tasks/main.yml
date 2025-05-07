@@ -1,0 +1,31 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for terraform
+- name: install gnupg
+  ansible.builtin.apt:
+    name: gnupg
+    state: present
+    update_cache: yes
+
+- name: Download and dearmor HashiCorp GPG key
+  ansible.builtin.shell: |
+    wget -qO- https://apt.releases.hashicorp.com/gpg \
+      | gpg --dearmor -o {{ keyring_path }}
+  args:
+    creates: "{{ keyring_path }}"
+
+- name: Add HashiCorp APT repository
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [arch={{ architecture_map[ansible_architecture]|default(ansible_architecture)  }}
+            signed-by={{ keyring_path  }}]
+      https://apt.releases.hashicorp.com
+      {{ ansible_lsb.codename  }} main
+    filename: hashicorp
+    state: present
+    update_cache: yes
+
+- name: Install Terraform
+  ansible.builtin.apt:
+    name: terraform
+    state: present

@@ -1,0 +1,8 @@
+---
+- name: Copy config.fish to fish config directory
+  copy:
+    src: config.fish
+    dest: "/home/{{ target_user }}/.config/fish/config.fish"
+    owner: "{{ target_user }}"
+    group: "{{ target_user }}"
+    mode: '0644'
