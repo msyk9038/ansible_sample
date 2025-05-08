@@ -1,0 +1,14 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for locales
+- name: Install locales
+  apt:
+    name: locales
+    state: present
+  when: ansible_os_family == "Debian"
+
+- name: Generate locales en_US.UTF-8
+  command: locale-gen en_US.UTF-8
+  when: ansible_os_family == "Debian"
+  args:
+    creates: /usr/lib/locale/en_US.UTF-8

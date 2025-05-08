@@ -4,5 +4,6 @@
     - role: awscli
     - role: direnv
     - role: fish
+    - role: locales
     - role: rust_toolchain
     - role: terraform
