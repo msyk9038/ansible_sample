@@ -5,6 +5,7 @@ awscli_arch: "{{ 'x86_64' if ansible_architecture == 'x86_64' else 'aarch64' }}"
 awscli_url: "https://awscli.amazonaws.com/awscli-exe-linux-{{ awscli_arch }}.zip"
 awscli_zip: "/tmp/awscliv2.zip"
 awscli_installer_dir: "/tmp/aws"
+awscli_bin: "/usr/local/bin/aws"
 
 # vars file for ssm plugin
 ssm_plugin_arch: "{{ 'ubuntu_arm64' if ansible_architecture in ['aarch64','arm64'] else 'ubuntu_64bit' }}"

@@ -1,9 +1,15 @@
 ---
+- name: Check if Session Manager Plugin is installed
+  stat:
+    path: "{{ ssm_plugin_bin }}"
+  register: ssm_plugin_installed
+
 - name: Download Session Manager Plugin .deb if not installed
   get_url:
     url: "{{ ssm_plugin_url }}"
     dest: "{{ ssm_plugin_dest }}"
     mode: '0644'
+  when: not ssm_plugin_installed.stat.exists
 
 - name: Install Session Manager Plugin from .deb if not installed
   apt:
