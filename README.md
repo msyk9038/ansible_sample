@@ -1,27 +1,41 @@
-Ansibleのroles機能を使ったサンプルです。
+# Ansible サンプルコード集
 
-WSL で実行する場合は、以下のようにしてください。
-xxxxxxxx はWSLにおけるユーザ名を代入します。
+このリポジトリには、Ansibleを使用した自動化のためのサンプルコードが含まれています。
 
-hosts.ini
-```
-[localhost]
-localhost ansible_connection=local ansible_python_interpreter=/usr/local/bin/python3
-[localhost:vars]
-target_user=xxxxxxxx
-```
+## 含まれるサンプル
 
-setup_ubuntu.yml
-```
-- hosts: localhost
-  become: true
-  roles:
-    - role: awscli
-    - role: direnv
-    - role: fish
-    - role: rust_toolchain
-    - role: terraform
+- 基本的なPlaybook例
+- ロール構成のサンプル
+- インベントリ設定例
+- 変数の使用例
+
+## 使い方
+
+```bash
+# インベントリを指定してPlaybookを実行
+ansible-playbook -i inventory/hosts playbooks/sample.yml
+
+# 特定のタグのみ実行
+ansible-playbook -i inventory/hosts playbooks/sample.yml --tags "setup,configure"
 ```
 
-上記2ファイルを設定後、`ansible-playbook -i hosts.ini setup_ubuntu.yml -K` を実行します。
-オプションKをつけることで、WSLのsudoに昇格する際の管理者パスワードを入力できるようにします。
+## 前提条件
+
+- Ansible 2.9以上
+- SSH接続が可能なターゲットホスト
+- 適切な権限を持つユーザー
+
+## ディレクトリ構成
+
+```
+.
+├── inventory/       # インベントリファイル
+├── playbooks/       # Playbookファイル
+├── roles/           # ロール定義
+└── vars/            # 変数ファイル
+```
+
+## 参考リソース
+
+- [Ansible 公式ドキュメント](https://docs.ansible.com/)
+- [Ansible Galaxy](https://galaxy.ansible.com/)
